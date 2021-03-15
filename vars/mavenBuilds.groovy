@@ -12,7 +12,14 @@ def call(body) {
             jdk 'linux_jdk8u221'
             maven 'linux_M3'
         }
-        agent any
+
+        triggers {
+            cron=config.cron
+        }
+
+        agent {
+            any
+        }
 
         stages {
             stage('Compile/Test/Install') {
