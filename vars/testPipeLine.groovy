@@ -27,20 +27,18 @@ def call(body) {
                             maven 'linux_M3'
                         }
                         steps {
-                            // checkout
-                            git poll: true, branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/threadingexample/code'
+                            dir('threading') {
+                                // checkout
+                                git poll: true, branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/threadingexample/code'
 
-                            // build
-                            withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
-                                sh 'mvn clean install'
-                            }
+                                // build
+                                withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
+                                    sh 'mvn clean install'
+                                }
 
-                            // tests
-                            withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
-                                sh 'mvn test'
+                                // archive artifacts
+                                stash allowEmpty: true, includes: 'target/Thr*.jar', name: 'jarFilesThreading'
                             }
-                            // archive artifacts
-                            stash allowEmpty: true, includes: 'target/Thr*.jar', name: 'jarFilesThreading'
                         }
                     }
                     stage('UNIX Build (Kotlin) ') {
@@ -50,20 +48,18 @@ def call(body) {
                             maven 'linux_M3'
                         }
                         steps {
-                            // checkout
-                            git poll: true, branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/the-example-app-kotlin/code'
+                            dir('kotlin') {
+                                // checkout
+                                git poll: true, branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/the-example-app-kotlin/code'
 
-                            // build
-                            withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
-                                sh 'mvn clean install'
-                            }
+                                // build
+                                withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
+                                    sh 'mvn clean install'
+                                }
 
-                            // tests
-                            withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
-                                sh 'mvn test'
+                                // archive artifacts
+                                stash allowEmpty: true, includes: 'target/dagg*.jar', name: 'jarFilesKotlin'
                             }
-                            // archive artifacts
-                            stash allowEmpty: true, includes: 'target/dagg*.jar', name: 'jarFilesKotlin'
                         }
                     }
                 }
