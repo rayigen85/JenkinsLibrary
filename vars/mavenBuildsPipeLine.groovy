@@ -14,7 +14,7 @@ def call(body) {
         }
 
         triggers {
-            cron=config.cron
+            cron(config.cron)
         }
 
         agent {
