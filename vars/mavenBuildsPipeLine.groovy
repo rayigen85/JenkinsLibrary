@@ -17,9 +17,7 @@ def call(body) {
             cron(config.cron)
         }
 
-        agent {
-            any
-        }
+        agent any
 
         stages {
             stage('Compile/Test/Install') {
