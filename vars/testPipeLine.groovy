@@ -6,12 +6,6 @@ def call(body) {
     body.delegate = config
     body()
 
-    properties([
-            pipelineTriggers([
-                    [$class: "SCMTrigger", scmpoll_spec: "* * * * *"],
-            ])
-    ])
-
     pipeline {
 
         agent { label 'mac'}
@@ -29,7 +23,7 @@ def call(body) {
                         steps {
                             dir('threading') {
                                 // checkout
-                                git poll: true, branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/threadingexample/code'
+                                git branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/threadingexample/code'
 
                                 // build
                                 withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
@@ -50,7 +44,7 @@ def call(body) {
                         steps {
                             dir('kotlin') {
                                 // checkout
-                                git poll: true, branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/the-example-app-kotlin/code'
+                                git branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/the-example-app-kotlin/code'
 
                                 // build
                                 withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
