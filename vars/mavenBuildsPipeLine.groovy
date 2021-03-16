@@ -22,10 +22,7 @@ def call(body) {
         stages {
             stage('Compile/Test/Install') {
                 steps {
-                    withMaven(jdk: 'linux_jdk8u221', maven: 'linux_M3') {
-                        sh 'mvn clean install'
-                        echo config.test
-                    }
+                    mavenBuild.cleanInstall
                 }
             }
 
