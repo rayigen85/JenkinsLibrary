@@ -25,7 +25,29 @@ def call(body) {
 
         agent any
 
+        environment {
+            MYKEY = 'value'
+        }
+
         stages {
+
+            stage('Print build Variables') {
+                steps {
+                    echo currentBuild.buildVariables
+                }
+            }
+
+            stage('Print previous build Variables') {
+                when {
+                    not {
+                        equals expected: null, actual: currentBuild.previousBuild
+                    }
+                }
+                steps {
+                    echo currentBuild.previousBuild.buildVariables
+                }
+            }
+
             stage('Compile/Test/Install') {
                 steps {
                     script {
