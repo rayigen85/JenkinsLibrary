@@ -1,5 +1,12 @@
 import com.jenkins.*;
 
+def cleanInstall(def steps) {
+    steps.withMaven(jdk: 'linux_jdk8u221', maven: 'linux_M3') {
+        steps.echo "CallCounter: " + steps.currentBuid.getNumber()
+        steps.sh 'mvn clean install'
+    }
+}
+
 def call(body) {
     LinkedHashMap config = [:]
     body.resolveStrategy = Closure.DELEGATE_FIRST
@@ -23,7 +30,7 @@ def call(body) {
             stage('Compile/Test/Install') {
                 steps {
                     script {
-                        MavenBuild.cleanInstall(this)
+                        cleanInstall(this)
                     }
                 }
             }
