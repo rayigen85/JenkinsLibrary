@@ -37,7 +37,8 @@ def call(body) {
                                 try {
                                     sh 'mvn sonar:sonar'
                                 } catch (exc) {
-                                    echo 'sonar checks failed' + exc.message
+                                    echo 'sonar checks failed: ' + exc
+                                    throw exc
                                 } finally  {
                                     echo 'sonar steo finished'
                                 }
