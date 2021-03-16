@@ -26,14 +26,14 @@ def call(body) {
         agent any
 
         environment {
-            MYKEY = 'value'
+            MYKEY = "value"
         }
 
         stages {
 
             stage('Print build Variables') {
                 steps {
-                    echo currentBuild.buildVariables
+                    echo currentBuild.buildVariables.MYKEY
                 }
             }
 
@@ -44,7 +44,7 @@ def call(body) {
                     }
                 }
                 steps {
-                    echo currentBuild.previousBuild.buildVariables
+                    echo currentBuild.previousBuild.buildVariables.MYKEY
                 }
             }
 
