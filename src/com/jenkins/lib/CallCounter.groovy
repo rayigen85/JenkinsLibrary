@@ -1,10 +1,10 @@
 package com.jenkins.lib;
 
-class CallCounter {
+public class CallCounter {
 
     static private int count = 0;
 
-    int count() {
+    public static int count() {
         return count++;
     }
 }

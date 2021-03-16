@@ -23,9 +23,9 @@ def call(body) {
             stage('Compile/Test/Install') {
                 steps {
                     echo ""
-                    //script {
-                    //    new mavenBuild().cleanInstall()
-                    //}
+                    script {
+                        MavenBuild.cleanInstall()
+                    }
                 }
             }
 
