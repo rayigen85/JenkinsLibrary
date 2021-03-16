@@ -25,7 +25,7 @@ def call(body) {
                 cron(config.cron)
             }
 
-            agent { label "evalServer"}
+            agent { label "unix"}
 
             environment {
                 MYKEY = "value"
