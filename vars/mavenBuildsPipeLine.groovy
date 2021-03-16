@@ -22,9 +22,8 @@ def call(body) {
         stages {
             stage('Compile/Test/Install') {
                 steps {
-                    echo ""
                     script {
-                        MavenBuild.cleanInstall()
+                        MavenBuild.cleanInstall(this)
                     }
                 }
             }
@@ -40,7 +39,7 @@ def call(body) {
                                     echo 'sonar checks failed: ' + exc.message
                                     throw new hudson.AbortException("sonar checks failed: " + exc.message)
                                 } finally  {
-                                    echo 'sonar steo finished'
+                                    echo 'sonar step finished'
                                 }
                             }
                         }
