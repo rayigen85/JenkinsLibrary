@@ -23,7 +23,7 @@ def call(body) {
             stage('Compile/Test/Install') {
                 steps {
                     script {
-                        mavenBuild.cleanInstall
+                        new mavenBuild().cleanInstall()
                     }
                 }
             }
