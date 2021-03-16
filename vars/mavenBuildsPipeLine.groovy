@@ -37,8 +37,8 @@ def call(body) {
                                 try {
                                     sh 'mvn sonar:sonar'
                                 } catch (exc) {
-                                    echo 'sonar checks failed: ' + exc
-                                    throw exc
+                                    echo 'sonar checks failed: ' + exc.message
+                                    throw new hudson.AbortException("sonar checks failed: " + exc.message)
                                 } finally  {
                                     echo 'sonar steo finished'
                                 }
