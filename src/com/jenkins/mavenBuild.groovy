@@ -6,6 +6,6 @@ public class mavenBuild {
             sh 'mvn clean install'
             echo config.test
         }
-        return CallCounter.count()
+        return new CallCounter().count()
     }
 }
