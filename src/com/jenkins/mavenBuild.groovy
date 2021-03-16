@@ -1,3 +1,5 @@
+package com.jenkins;
+
 import com.jenkins.lib.*;
 
 public class mavenBuild {
