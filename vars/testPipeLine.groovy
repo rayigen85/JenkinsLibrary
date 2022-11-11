@@ -17,8 +17,7 @@ def call(body) {
                     stage('MAC Build (Java Threading)') {
                         agent { label 'mac' }
                         tools {
-                            jdk 'linux_jdk1.8.0_172'
-                            maven 'linux_M3'
+                            maven 'Maven 3.3.9'
                         }
                         steps {
                             dir('threading') {
@@ -26,7 +25,7 @@ def call(body) {
                                 git branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/threadingexample/code'
 
                                 // build
-                                withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
+                                withMaven( maven: 'Maven 3.3.9') {
                                     sh 'mvn clean install'
                                 }
 
@@ -38,8 +37,7 @@ def call(body) {
                     stage('UNIX Build (Kotlin) ') {
                         agent { label 'unix' }
                         tools {
-                            jdk 'linux_jdk1.8.0_172'
-                            maven 'linux_M3'
+                            maven 'Maven 3.3.9'
                         }
                         steps {
                             dir('kotlin') {
@@ -47,7 +45,7 @@ def call(body) {
                                 git branch: 'master', credentialsId: 'd6ae3020-ebc8-4fa7-9071-5f96e10ce3f8', url: 'https://thomasmosigfrey@git.code.sf.net/p/the-example-app-kotlin/code'
 
                                 // build
-                                withMaven(jdk: 'linux_jdk1.8.0_172', maven: 'linux_M3') {
+                                withMaven(maven: 'Maven 3.3.9') {
                                     sh 'mvn clean install'
                                 }
 
@@ -61,8 +59,7 @@ def call(body) {
             stage ('SIT Test') {
                 agent { label 'test' }
                 tools {
-                    jdk 'linux_jdk1.8.0_172'
-                    maven 'linux_M3'
+                    maven 'Maven 3.3.9'
                 }
                 steps {
                     // retrieve artifacts

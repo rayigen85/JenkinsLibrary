@@ -1,7 +1,7 @@
 import com.jenkins.*;
 
 def cleanInstall(def steps) {
-    steps.withMaven(jdk: 'linux_jdk8u221', maven: 'linux_M3') {
+    steps.withMaven(maven: 'Maven 3.3.9') {
         steps.sh 'mvn clean install'
     }
 }
@@ -17,8 +17,7 @@ def call(body) {
         pipeline {
 
             tools {
-                jdk 'linux_jdk8u221'
-                maven 'linux_M3'
+                maven 'Maven 3.3.9'
             }
 
             triggers {
@@ -60,7 +59,7 @@ def call(body) {
 
                 stage('Code Analysis') {
                     steps {
-                        withMaven(jdk: 'linux_jdk8u221', maven: 'linux_M3') {
+                        withMaven(maven: 'Maven 3.3.9') {
                             withSonarQubeEnv('jenkins') {
                                 script {
                                     try {
@@ -79,7 +78,7 @@ def call(body) {
 
                 stage('Deploy') {
                     steps {
-                        withMaven(jdk: 'linux_jdk8u221', maven: 'linux_M3') {
+                        withMaven(maven: 'Maven 3.3.9') {
                             sh 'echo mvn deploy -Dmaven.test.skip=true'
                         }
                     }
