@@ -2,6 +2,9 @@ import com.jenkins.*;
 
 def call(body) {
     LinkedHashMap config = [:]
+    
+    def mvnBuild = new MavenBuild()    
+    
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
     body()
@@ -11,8 +14,8 @@ def call(body) {
       stages {
           stage('Compile/Test') {
               steps {
-                  withMaven(maven: 'Maven 3.8.6') {
-                      sh "mvn clean install"
+                  script {
+                      mvnBuild.cleanInstall(this)
                   }
               }
           }
