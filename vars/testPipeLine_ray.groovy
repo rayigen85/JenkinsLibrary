@@ -11,6 +11,9 @@ def call(body) {
         label 'rbaruth'
     }
     stages {
+        stage('Echo config map') {
+            echo config
+        }
         stage('WS cleanup'){
             steps{cleanWs()}
             
