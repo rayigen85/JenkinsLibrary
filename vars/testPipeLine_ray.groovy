@@ -15,6 +15,11 @@ def call(body) {
             steps{cleanWs()}
             
         }
+        stage('SCM checkout') {
+            steps {
+                git credentialsId: '1743a11b-ed27-416c-a3b9-de0a1555a33f', url: 'https://github.com/ThomasMosigFrey/jee8.git/'
+                }
+        }
         stage('compile/test') {
             steps {
                 withMaven(maven: 'Maven 3.8.6') {
