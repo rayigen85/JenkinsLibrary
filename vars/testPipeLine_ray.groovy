@@ -13,7 +13,7 @@ def call(body) {
     stages {
         stage('Echo config map') {
             steps {
-                echo config
+                echo config.branch_name
             }
         }
         stage('WS cleanup'){
