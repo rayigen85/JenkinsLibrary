@@ -12,7 +12,9 @@ def call(body) {
     }
     stages {
         stage('Echo config map') {
-            echo config
+            steps {
+                echo config
+            }
         }
         stage('WS cleanup'){
             steps{cleanWs()}
